@@ -47,7 +47,7 @@ class LossAndDerivatives:
         """
         
         # YOUR CODE HERE
-        return np.sum (w ** 2, axis = (0, 1))
+        return np.sum (w ** 2)
 
     @staticmethod
     def l1_reg(w):
@@ -61,7 +61,7 @@ class LossAndDerivatives:
         """
 
         # YOUR CODE HERE
-        return np.sum (w ** 2)
+        return np.sum (abs (w))
 
     @staticmethod
     def no_reg(w):
@@ -87,8 +87,7 @@ class LossAndDerivatives:
         """
 
         # YOUR CODE HERE
-        from numpy.linalg import inv
-        return np.array (inv(X.T @ X + np.eye (X.shape[1])).dot(X.T @ Y))
+        return (-2 * X.T @ (Y - X.dot(w))) / Y.size
 
     @staticmethod
     def mae_derivative(X, Y, w):
@@ -107,7 +106,7 @@ class LossAndDerivatives:
         """
 
         # YOUR CODE HERE
-        return 
+        return -1 * X.T @ np.sign (Y - X.dot(w)) / Y.size
 
     @staticmethod
     def l2_reg_derivative(w):
@@ -120,7 +119,7 @@ class LossAndDerivatives:
         """
 
         # YOUR CODE HERE
-        return 
+        return 2 * w
 
     @staticmethod
     def l1_reg_derivative(w):
@@ -134,7 +133,7 @@ class LossAndDerivatives:
         """
 
         # YOUR CODE HERE
-        return 
+        return np.sign (w)
 
     @staticmethod
     def no_reg_derivative(w):
